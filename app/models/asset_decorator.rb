@@ -1,4 +1,4 @@
-Asset.class_eval do
+Spree::Asset.class_eval do
   
   has_many :assets_shares, :dependent => :destroy
   has_many :variants, :through => :assets_shares, :source => :shareable, :source_type => "Variant", :class_name => "Variant"
