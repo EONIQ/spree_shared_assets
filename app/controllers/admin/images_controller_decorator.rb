@@ -1,4 +1,4 @@
-Admin::ImagesController.class_eval do
+Spree::Admin::ImagesController.class_eval do
 
   private
 
