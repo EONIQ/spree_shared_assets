@@ -1,4 +1,4 @@
-class Admin::SharedAssetSettingsController < Admin::BaseController
+class Spree::Admin::SharedAssetSettingsController < Spree::Admin::BaseController
   def update
     Spree::SharedAssets::Config.set(params[:preferences])
     respond_to do |format|
