@@ -2,6 +2,7 @@ module Spree
   module Admin
     ImagesController.class_eval do
       create.after :assign_to_product
+      update.after :assign_to_product
       private
 
       def assign_to_product
