@@ -1,8 +1,14 @@
 module Spree
   module Admin
     ImagesController.class_eval do
-
+      create.after :assign_to_product
       private
+
+      def assign_to_product
+        if @image.products.length > 0
+          @product.images << @image unless @product.images.include?(@image)
+        end
+      end
 
       def load_data
         @product = Spree::Product.find_by_permalink(params[:product_id])
