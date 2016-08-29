@@ -8,7 +8,7 @@ Spree::Asset.class_eval do
     (products + variants).uniq
   end
   
-  scope :for_product, -> { 
+  scope :for_product, ->(product) {
     joins(:variants, :assets_shares).
     select('DISTINCT assets.*, assets_shares.shareable_id as shareable_id').
     where(variants: { product_id: product.id }).order('assets.position ASC') 
