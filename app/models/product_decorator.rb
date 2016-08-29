@@ -8,7 +8,7 @@ Spree::Product.class_eval do
   end
   
   def variant_images
-    Asset.for_product(self)
+    Spree::Asset.for_product(self)
   end
   
 end
