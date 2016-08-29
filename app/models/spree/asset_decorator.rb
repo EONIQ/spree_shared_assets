@@ -8,13 +8,6 @@ Spree::Asset.class_eval do
     (products + variants).uniq
   end
   
-  scope :for_product, lambda { |product|
-    {
-      :joins      => [:variants, :assets_shares],
-      :conditions => { :variants => { :product_id => product.id } },
-      :select     => "DISTINCT assets.*, assets_shares.shareable_id as shareable_id",
-      :order      => "assets.position ASC"
-    }
-  }
-  
+  scope :for_product, -> { select('DISTINCT assets.*, assets_shares.shareable_id as shareable_id').
+    joins([:variants, :assets_shares]).where({ variants: { product_id: product.id }}).order('assets.position ASC') }
 end
