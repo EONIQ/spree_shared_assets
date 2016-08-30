@@ -7,7 +7,6 @@ Spree::Admin::ImagesController.class_eval do
     @variants = Spree::Variant.all.map do |variant|
       [variant.sku_and_options_text, variant.id]
     end
-    @variants.insert(0, [Spree.t(:all), @product.master.id])
   end
 
   def load_data
