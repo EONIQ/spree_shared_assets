@@ -2,18 +2,19 @@ Spree::Admin::ImagesController.class_eval do
 
   private
 
+  def load_edit_data
+    @product = Spree::Product.friendly.includes(*variant_edit_includes).find(params[:product_id])
+    @variants = Spree::Variant.all.map do |variant|
+      [variant.sku_and_options_text, variant.id]
+    end
+    @variants.insert(0, [Spree.t(:all), @product.master.id])
+  end
+
   def load_data
     @product = Spree::Product.find_by_permalink(params[:product_id])
   end
 
   def set_viewable
-    
-    logger.debug('SET VIEWABLE')
-    
-    logger.debug(params[:shareable_id])
-    
-    
-    
     if params[:shareable_id] && !params[:shareable_id].blank? # Check if "Product" option was selected
       # Assign to product
       @image.products << @product unless @image.products.include?(@product)
