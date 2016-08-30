@@ -1,8 +1,8 @@
 Spree::Asset.class_eval do
   
   has_many :assets_shares, :dependent => :destroy
-  has_many :variants, :through => :assets_shares, :source => :shareable, :source_type => "Variant", :class_name => "Variant"
-  has_many :products, :through => :assets_shares, :source => :shareable, :source_type => "Product", :class_name => "Product"
+  has_many :variants, :through => :assets_shares, :source => :shareable, :source_type => "Spree::Variant", :class_name => "Spree::Variant"
+  has_many :products, :through => :assets_shares, :source => :shareable, :source_type => "Spree::Product", :class_name => "Spree::Product"
   
   def assignments
     (products + variants).uniq
