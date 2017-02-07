@@ -4,8 +4,8 @@ Spree::Admin::ImagesController.class_eval do
 
   def load_edit_data
     @product = Spree::Product.friendly.includes(*variant_edit_includes).find(params[:product_id])
-    @variants = Spree::Variant.eager_load(product: :option_types).all.map do |variant|
-      [variant.sku_and_options_text, variant.id]
+    @variants = Spree::Variant.eager_load(:product).all.map do |variant|
+      ["#{variant.sku} #{variant.name}", variant.id]
     end
   end
 
