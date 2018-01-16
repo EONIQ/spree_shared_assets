@@ -4,6 +4,10 @@ Spree::Asset.class_eval do
   has_many :variants, :through => :assets_shares, :source => :shareable, :source_type => "Spree::Variant", :class_name => "Spree::Variant"
   has_many :products, :through => :assets_shares, :source => :shareable, :source_type => "Spree::Product", :class_name => "Spree::Product"
   
+  def shareables
+    assets_shares.flat_map(&:shareable)
+  end
+
   def assignments
     (products + variants).uniq
   end
